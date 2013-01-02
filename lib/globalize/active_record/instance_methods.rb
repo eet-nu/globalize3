@@ -147,7 +147,9 @@ module Globalize
       end
 
       def globalize_fallbacks(locale)
-        Globalize.fallbacks(locale)
+        fallbacks = Globalize.fallbacks(locale)
+        fallbacks << self.locale.to_sym if fallback_to_object_locale && respond_to?(:locale) 
+        fallbacks
       end
 
       def rollback

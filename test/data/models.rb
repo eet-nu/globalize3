@@ -88,7 +88,7 @@ end
 
 
 class Word < ActiveRecord::Base
-  translates :term, :definition
+  translates :term, :definition, :fallback_to_object_locale => true
 end
 
 class LegacyWord < ActiveRecord::Base

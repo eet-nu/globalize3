@@ -10,10 +10,11 @@ module Globalize
           options[:table_name] ||= "#{table_name.singularize}_translations"
           options[:foreign_key] ||= class_name.foreign_key
 
-          class_attribute :translated_attribute_names, :translation_options, :fallbacks_for_empty_translations
+          class_attribute :translated_attribute_names, :translation_options, :fallbacks_for_empty_translations, :fallback_to_object_locale
           self.translated_attribute_names = []
           self.translation_options        = options
           self.fallbacks_for_empty_translations = options[:fallbacks_for_empty_translations]
+          self.fallback_to_object_locale        = options[:fallback_to_object_locale]
 
           include InstanceMethods
           extend  ClassMethods, Migration

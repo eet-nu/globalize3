@@ -191,6 +191,14 @@ class TranslatedTest < Test::Unit::TestCase
 
     Globalize.fallbacks = nil
   end
+  
+  test 'fallback to object locale' do
+    word = Word.create :locale => 'nl', :term => 'ontvrienden', :definition => 'Iemand als vriend verwijderen op een sociaal netwerk'
+
+    I18n.locale = :en
+    word.update_attributes :definition => 'To remove someone as a friend on a social network'
+    assert_equal 'ontvrienden', word.term
+  end
 end
 # TODO should validate_presence_of take fallbacks into account? maybe we need
 #   an extra validation call, or more options for validate_presence_of.
